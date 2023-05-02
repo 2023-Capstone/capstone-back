@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div class="container">
+    <!-- action url로 post 방식으로 "name"이 넘어옴 -->
+    <form action="/api/diary" method="post">
+        <div class="form-group">
+            <label for="title">제목</label>
+            <input type="text" id="title" title="title" placeholder="제목을
+입력하세요">
+        </div>
+        <button type="submit">등록</button>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>
