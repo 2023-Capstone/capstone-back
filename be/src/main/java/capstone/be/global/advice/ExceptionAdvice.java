@@ -171,6 +171,17 @@ public class ExceptionAdvice {
         ));
     }
 
+    /***
+     * 010
+     * 유저를 찾을 수 없을 때 발생하는 에러
+     //     */
+    @ExceptionHandler(CUserNotFound2Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected HttpEntity<CommonResult> userNotFound2Exception(HttpServletRequest request, Exception e) {
+        return new HttpEntity<>(responseService.getFailResult(
+                (getMessage("userNotFound2.code"))));
+    }
+
 
     private String getMessage(String code) {
         return getMessage(code, null);
