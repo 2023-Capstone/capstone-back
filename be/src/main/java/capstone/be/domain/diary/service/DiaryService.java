@@ -29,7 +29,7 @@ public class DiaryService {
         try {
             Diary diary = diaryRepository.getReferenceById(diaryId);
             if (dto.getTitle() != null) { diary.setTitle(dto.getTitle()); }
-            if (dto.getWeather() != null) { diary.setWeather(dto.getWeather(); }
+            if (dto.getWeather() != null) { diary.setWeather(dto.getWeather()); }
             if (dto.getHashtag() != null) { diary.setHashtag(dto.getHashtag()); }
             if (dto.getMood() != null) { diary.setMood(dto.getMood()); }
         }catch (EntityNotFoundException e){
