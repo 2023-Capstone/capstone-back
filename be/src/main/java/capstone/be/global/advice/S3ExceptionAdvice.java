@@ -31,13 +31,13 @@ public class S3ExceptionAdvice {
     @ExceptionHandler(AmazonS3Exception.class)
     protected ResponseEntity<CommonResult> AmazonS3Exception(HttpServletRequest request, AmazonS3Exception e) {
         return ResponseEntity.status(400).body(responseService.getFailResult(
-                (getMessage("imgFormatException.code"))
+                (getMessage("imgServerException"))
         ));
     }
 
     // IMAGE_002
     @ExceptionHandler(S3ImgFormatException.class)
-    protected ResponseEntity<CommonResult> ImgformatException(HttpServletRequest request, S3ImgFormatException e) {
+    protected ResponseEntity<CommonResult> S3ImgformatException(HttpServletRequest request, S3ImgFormatException e) {
         return ResponseEntity.status(400).body(responseService.getFailResult(
                 (getMessage("imgFormatException.code"))
         ));
@@ -48,7 +48,7 @@ public class S3ExceptionAdvice {
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     protected ResponseEntity<CommonResult> MaxUploadSizeExceededException(HttpServletRequest request, MaxUploadSizeExceededException e) {
         return ResponseEntity.status(500).body(responseService.getFailResult(
-                (getMessage("imgServerException"))
+                (getMessage("imgSizeException"))
         ));
     }
 
