@@ -8,6 +8,7 @@ import capstone.be.domain.diary.dto.DiaryDto;
 import capstone.be.domain.diary.dto.response.DiaryCreateResponse;
 import capstone.be.domain.diary.dto.response.DiaryMoodSearchResponse;
 import capstone.be.domain.diary.dto.response.DiaryMoodTotalResponse;
+import capstone.be.domain.diary.repository.DiaryRepository;
 import capstone.be.domain.diary.service.DiaryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +30,7 @@ public class DiaryController {
     private final DiaryService diaryService;
 
     @PostMapping
-    public ResponseEntity<DiaryCreateResponse> createDiary(@RequestBody DiaryDto diaryDto){   // id 만 반환하는 응답
+    public ResponseEntity<DiaryCreateResponse> createDiary(@RequestBody DiaryDto diaryDto) throws IOException {   // id 만 반환하는 응답
         System.out.println(diaryDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(diaryService.save(diaryDto));
     }

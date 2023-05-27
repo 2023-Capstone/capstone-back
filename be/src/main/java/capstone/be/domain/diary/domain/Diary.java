@@ -34,6 +34,9 @@ public class Diary extends AuditingFields {
     @Setter
     private String mood;
 
+    @Setter
+    private String thumbnail;
+
 
     @Type(type="json")
     @Column(columnDefinition = "LONGTEXT")
@@ -93,5 +96,9 @@ public class Diary extends AuditingFields {
     }
     public List<BProperties> getBlocks() {
         return blocks;
+    }
+
+    public String getThumbnail(){
+        return thumbnail;
     }
 }

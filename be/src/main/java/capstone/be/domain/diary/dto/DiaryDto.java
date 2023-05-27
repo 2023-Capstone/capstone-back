@@ -24,7 +24,7 @@ public class DiaryDto{
 
 
         public Diary toEntity(){
-                return Diary.of(title, weather, hashtag, mood,font,blocks);
+                return Diary.of(title, weather, hashtag, mood,font, blocks);
         }
 
         public static DiaryDto of(String title, String weather, String hashtag, String mood,String font,List<BProperties> blocks) {
