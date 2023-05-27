@@ -5,6 +5,7 @@ package capstone.be.domain.diary.controller;
 import capstone.be.domain.diary.domain.Diary;
 import capstone.be.domain.diary.dto.DiaryCreatedDto;
 import capstone.be.domain.diary.dto.DiaryDto;
+import capstone.be.domain.diary.dto.request.DiaryRequest;
 import capstone.be.domain.diary.dto.response.DiaryCreateResponse;
 import capstone.be.domain.diary.dto.response.DiaryMoodSearchResponse;
 import capstone.be.domain.diary.dto.response.DiaryMoodTotalResponse;
@@ -30,9 +31,10 @@ public class DiaryController {
     private final DiaryService diaryService;
 
     @PostMapping
-    public ResponseEntity<DiaryCreateResponse> createDiary(@RequestBody DiaryDto diaryDto) throws IOException {   // id 만 반환하는 응답
-        System.out.println(diaryDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(diaryService.save(diaryDto));
+
+
+    public ResponseEntity<DiaryCreateResponse> createDiary(@RequestBody DiaryRequest diaryRequest) throws IOException{   // id 만 반환하는 응답
+        return ResponseEntity.status(HttpStatus.CREATED).body(diaryService.saveDiary(diaryRequest.toDto()));
     }
 
     @GetMapping("/{diaryId}")
@@ -42,15 +44,15 @@ public class DiaryController {
 
 
     @PatchMapping("/{diaryId}")
-    public ResponseEntity<?> updateDiary(@PathVariable Long diaryId, DiaryDto diaryDto){
-        diaryService.update(diaryId, diaryDto);
+    public ResponseEntity<?> updateDiary(@PathVariable Long diaryId, @RequestBody DiaryRequest diaryRequest){
+        diaryService.updateDiary(diaryId, diaryRequest.toDto());
         return ResponseEntity.ok("");
     }
 
 
     @DeleteMapping("/{diaryId}")
     public ResponseEntity<?> deleteArticle(@PathVariable Long diaryId){  // 응답 값 없음
-        diaryService.delete(diaryId);
+        diaryService.deleteDiary(diaryId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
     }
 
@@ -75,5 +77,4 @@ public class DiaryController {
         DiaryMoodTotalResponse response = diaryService.getMoodTotal();
         return response;
     }
-
 }
