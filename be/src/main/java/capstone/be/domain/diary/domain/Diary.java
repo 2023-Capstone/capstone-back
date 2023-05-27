@@ -1,14 +1,18 @@
 package capstone.be.domain.diary.domain;
 
 import capstone.be.global.entity.AuditingFields;
+import io.hypersistence.utils.hibernate.type.json.JsonStringType;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
 import javax.persistence.*;
 import java.util.List;
 
 
 
 @Entity
+@TypeDef(name = "json", typeClass = JsonStringType.class)
 public class Diary extends AuditingFields {
 
     @Id
