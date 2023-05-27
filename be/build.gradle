@@ -51,10 +51,9 @@ dependencies {
 	implementation 'com.amazonaws:aws-java-sdk-s3:1.12.281'
 
 	implementation 'io.hypersistence:hypersistence-utils-hibernate-55:3.3.2'
-
+  
 	//썸네일 생성 라이브러리
 	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.19'
-
 
 
 }
