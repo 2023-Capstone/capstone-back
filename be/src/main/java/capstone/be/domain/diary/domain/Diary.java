@@ -2,7 +2,6 @@ package capstone.be.domain.diary.domain;
 
 import capstone.be.domain.hashtag.domain.Hashtag;
 import capstone.be.global.entity.AuditingFields;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,6 +11,12 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.hibernate.annotations.Type;
+import javax.persistence.*;
+import java.util.List;
+
+
+
 @Getter
 @ToString(callSuper = true)
 @Entity
@@ -20,9 +25,11 @@ public class Diary extends AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Setter
     @Column(nullable = false)
     private String title;
+
     @Setter
     private String weather;
 
@@ -34,27 +41,41 @@ public class Diary extends AuditingFields {
     )
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
+
+    @Setter
+    private String font;
+
+
     @Setter
     private String mood;
 
 
 
-    //Todo: Block 구현 Entity로 구현하면 될듯 
+    @Type(type="json")
+    @Column(columnDefinition = "LONGTEXT")
+    @Setter
+    private List<BProperties> blocks;
+
+
 
 
 
     public Diary() {
 
+
     }
 
-    private Diary(String title, String weather, String mood) {
+    private Diary(String title, String weather, String mood, String font, List<BProperties> blocks) {
         this.title = title;
         this.weather = weather;
         this.mood = mood;
+        this.font=font;
+        this.blocks =blocks;
+
     }
 
-    public static Diary of(String title, String weather, String mood){
-        return new Diary(title, weather, mood);
+    public static Diary of(String title, String weather, String mood, String font, List<BProperties> blocks){
+        return new Diary(title, weather, mood, font, blocks);
     }
 
     public void addHashtag(Hashtag hashtag) {
