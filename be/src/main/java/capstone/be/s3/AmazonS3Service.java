@@ -77,6 +77,7 @@ public class AmazonS3Service {
 
     }
 
+
     //원본 이미지 링크를 받아서 썸네일을 만들도록 함.
     public String uploadThumbnail(String imageUrl, String dirName, int width, int height) throws IOException {
         // 원본 이미지를 로컬에 저장

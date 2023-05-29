@@ -17,6 +17,7 @@ public class DiaryMoodSearchResponse {
     private Long id;
     private String title;
     private String thumbnail;
+
     private String createAt;
 
     public static DiaryMoodSearchResponse from(final Diary diary) {

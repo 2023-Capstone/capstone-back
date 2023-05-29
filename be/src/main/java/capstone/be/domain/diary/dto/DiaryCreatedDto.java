@@ -7,10 +7,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.time.LocalDateTime;
 import capstone.be.domain.hashtag.dto.HashtagDto;
 
+
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import java.util.List;
+
 
 public record DiaryCreatedDto(
         String title,
@@ -23,7 +26,6 @@ public record DiaryCreatedDto(
 
         List<BProperties> blocks,
         LocalDateTime date
-){
 
 
 

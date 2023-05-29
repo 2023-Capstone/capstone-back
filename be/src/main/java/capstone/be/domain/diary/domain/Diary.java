@@ -4,15 +4,9 @@ import capstone.be.domain.hashtag.domain.Hashtag;
 import capstone.be.global.entity.AuditingFields;
 
 import io.hypersistence.utils.hibernate.type.json.JsonStringType;
-import lombok.Setter;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-
-import javax.persistence.*;
-import java.util.List;
-
 
 import lombok.Getter;
+
 import lombok.Setter;
 import lombok.ToString;
 
@@ -20,6 +14,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
 import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.List;
@@ -51,6 +46,7 @@ public class Diary extends AuditingFields {
     )
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
+
     @Setter
     private String font;
 
@@ -68,13 +64,13 @@ public class Diary extends AuditingFields {
     private List<BProperties> blocks;
 
 
+
     @Type(type="json")
     @Column(columnDefinition = "LONGTEXT")
     @Setter
     private List<BProperties> blocks;
 
 
-    //Todo: Block 구현 Entity로 구현하면 될듯 
 
 
 
