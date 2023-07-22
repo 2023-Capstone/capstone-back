@@ -71,6 +71,7 @@ public class CalendarMoodController {
 
         if (!(year > 1900) || !(year < 9999) || !(month >= 1) || !(month <= 12)){ //정수 범위 초과 시
             throw new CDiaryCalendarException();
+
         }
 
         //캘린더 정보 불러내기
