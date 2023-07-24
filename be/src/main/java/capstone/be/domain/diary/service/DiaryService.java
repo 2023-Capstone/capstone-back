@@ -13,6 +13,7 @@ import capstone.be.domain.diary.repository.DiaryRepository;
 import capstone.be.domain.hashtag.domain.Hashtag;
 import capstone.be.domain.hashtag.service.HashtagService;
 import capstone.be.global.advice.exception.diary.CDiaryNotFoundException;
+import capstone.be.global.advice.exception.diary.CDiaryPastEditException;
 import capstone.be.s3.AmazonS3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -91,6 +92,12 @@ public class DiaryService {
         try {
             Diary diary = diaryRepository.getReferenceById(diaryId);
 
+            //DIARY_009
+            LocalDate currentDate = LocalDate.now();
+            LocalDate creationDate = diary.getCreatedAt().toLocalDate();
+            if(!currentDate.equals(creationDate)){
+                throw new CDiaryPastEditException();
+            }
 
             if (dto.getTitle() != null) { diary.setTitle(dto.getTitle()); }
             if (dto.getWeather() != null) { diary.setWeather(dto.getWeather()); }
@@ -104,17 +111,17 @@ public class DiaryService {
                     .collect(Collectors.toUnmodifiableSet());
             diary.clearHashtags();
             diaryRepository.flush();
-
             hashtagIds.forEach(hashtagService::deleteHashtagWithoutArticles);
 
             Set<Hashtag> hashtags = renewHashtagsFromContent(dto);
             diary.addHashtags(hashtags);
 
         }catch (EntityNotFoundException e){
-            // Diary_009
+            // Diary_008
             throw new CDiaryNotFoundException();
         }
     }
+
 
     public void deleteDiary(Long diaryId) {
         Diary diary = diaryRepository.getReferenceById(diaryId);
